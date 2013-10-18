@@ -21,6 +21,13 @@ class RegistrationController < Devise::RegistrationsController
     if @member.errors.blank?
 
       @member.save
+
+
+      UserMailer.registration_confirmation(@member).deliver
+
+
+
+
       @contact.member = @member
       @contact.save
       redirect_to dashboard_path
